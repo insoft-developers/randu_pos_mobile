@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "494170735042",
+    "project_id": "randu-app",
+    "storage_bucket": "randu-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:494170735042:android:d36987173846d71e86165b",
+        "android_client_info": {
+          "package_name": "com.randu.pos"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOmOXPWcU1rpjoBR4EFESBNB3i1OggcJk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

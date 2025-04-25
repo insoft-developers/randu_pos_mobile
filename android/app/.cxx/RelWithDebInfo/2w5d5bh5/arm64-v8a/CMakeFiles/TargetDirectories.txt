@@ -1,0 +1,2 @@
+/Users/macbook/flutter-project/randu-pos/randu/android/app/.cxx/RelWithDebInfo/2w5d5bh5/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/macbook/flutter-project/randu-pos/randu/android/app/.cxx/RelWithDebInfo/2w5d5bh5/arm64-v8a/CMakeFiles/rebuild_cache.dir

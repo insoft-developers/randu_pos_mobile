@@ -1,0 +1,10 @@
+const String logDashboardPage = 'pos-dashboard';
+const String logTransactionManagementPage = 'pos-transaction-management';
+const String logDailyRecapPage = 'pos-daily-recap';
+const String logExpenditureDataPage = 'pos-expenditure-data';
+const String logQrTablePage = 'pos-qr-table';
+const String logAttendancePage = 'pos-attendance';
+const String logProductsPage = 'pos-products';
+const String logCategoriesProductPage = 'pos-categories-product';
+const String lockScreenPage = 'pos-lock-screen';
+const String logRekap = 'rekap-v2';
