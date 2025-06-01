@@ -59,15 +59,15 @@ class RanduDrawer extends ConsumerWidget {
                   onTap: () => DrawerMethods.navigateToPage(
                       ref, context, 1, logTransactionManagementPage),
                 ),
+                // DrawerListTile(
+                //   icon: Icons.receipt,
+                //   title: 'Rekapitulasi Harian',
+                //   onTap: () => DrawerMethods.navigateToPage(
+                //       ref, context, 2, logDailyRecapPage),
+                // ),
                 DrawerListTile(
                   icon: Icons.receipt,
                   title: 'Rekapitulasi Harian',
-                  onTap: () => DrawerMethods.navigateToPage(
-                      ref, context, 2, logDailyRecapPage),
-                ),
-                DrawerListTile(
-                  icon: Icons.receipt,
-                  title: 'Rekapitulasi Harian V2',
                   onTap: () =>
                       DrawerMethods.navigateToPage(ref, context, 8, logRekap),
                 ),

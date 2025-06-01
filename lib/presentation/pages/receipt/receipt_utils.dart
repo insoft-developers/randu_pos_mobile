@@ -16,10 +16,12 @@ import '../../../domain/entities/transaction/cart/receipt_from_enum.dart';
 import '../../../domain/entities/transaction/cart/request/payment/payment_request_model.dart';
 import '../../../domain/entities/transaction/sale_type/sale_type_enum.dart';
 import '../../../domain/entities/user_model.dart';
+import '../../../insoft/controller/payment_method_controller.dart';
 import '../../providers/cores/router/go_router_provider.dart';
 import '../../providers/main/printer/multi_printer/printer_multi_provider.dart';
 import '../../providers/main/printer/printer_service_provider.dart';
 import '../dashboard/utils/dashboard_utils.dart';
+import 'package:get/get.dart';
 
 String truncateWithEllipsis(String text, int maxLength) {
   if (text.length <= maxLength) {
@@ -125,6 +127,7 @@ extension PaymentReceiptModelExtensions on PaymentReceiptModel {
     bool isCashier = false,
     bool isPrintAllProductChecker = false,
   }) async {
+    final PaymentMethodController _payment = Get.put(PaymentMethodController());
     final Generator ticket = Generator(paperSize, capabilityProfile);
     List<int> bytes = [];
     void addRowToTicket(String label, String value) {
@@ -185,6 +188,7 @@ extension PaymentReceiptModelExtensions on PaymentReceiptModel {
         truncateWithEllipsis(
             customer ?? '', paperSize == PaperSize.mm80 ? 24 : 18));
     addRowToTicket('PEMBAYARAN', paymentMethod);
+    addRowToTicket('FLAG', _payment.selectedFlagName.value);
 
     bytes += ticket.hr();
 
@@ -673,59 +677,232 @@ Future<List<int>> generateDailyRecap2({
 
   bytes += generator.hr();
   bytes += generator.row([
-    PosColumn(text: 'Nama Toko', width: 5),
+    PosColumn(text: 'Nama Toko', width: 6),
     PosColumn(text: ':', width: 1),
     PosColumn(
       text: data['nama_toko'],
-      width: 6,
+      width: 5,
       styles: const PosStyles(align: PosAlign.right),
     ),
   ]);
 
   bytes += generator.row([
-    PosColumn(text: 'Nama Kasir', width: 5),
+    PosColumn(text: 'Nama Kasir', width: 6),
     PosColumn(text: ':', width: 1),
     PosColumn(
       text: data['user']['fullname'] ?? '-',
-      width: 6,
+      width: 5,
       styles: const PosStyles(align: PosAlign.right),
     ),
   ]);
 
   bytes += generator.row([
-    PosColumn(text: 'Buka', width: 5),
+    PosColumn(text: 'Buka', width: 6),
     PosColumn(text: ':', width: 1),
     PosColumn(
       text: data['kas_kecil']['open_cashier_at'] ?? '-',
-      width: 6,
+      width: 5,
       styles: const PosStyles(align: PosAlign.right),
     ),
   ]);
 
   bytes += generator.row([
-    PosColumn(text: 'Tutup', width: 5),
+    PosColumn(text: 'Tutup', width: 6),
     PosColumn(text: ':', width: 1),
     PosColumn(
       text: data['kas_kecil']['close_cashier_at'] ?? '-',
-      width: 6,
+      width: 5,
       styles: const PosStyles(align: PosAlign.right),
     ),
   ]);
 
   bytes += generator.hr();
   bytes += generator.row([
-    PosColumn(text: 'Kas Awal', width: 5),
+    PosColumn(text: 'Kas Awal', width: 6),
     PosColumn(text: ':', width: 1),
     PosColumn(
-      text: data['kas_kecil']['initial_cash_amount'] ?? '-',
-      width: 6,
+      text: formatStringIDRToCurrency(
+          text: '${(data['kas_kecil']['initial_cash_amount'] ?? 0)}',
+          symbol: 'Rp '),
+      width: 5,
+      styles: const PosStyles(align: PosAlign.right),
+    ),
+  ]);
+  bytes += generator.hr();
+  bytes += generator.row([
+    PosColumn(text: 'Penjualan Kas/Bayar Tunai di Kasir', width: 6),
+    PosColumn(text: ':', width: 1),
+    PosColumn(
+      text: formatStringIDRToCurrency(
+          text: '${(data['tunai'] ?? 0)}', symbol: 'Rp '),
+      width: 5,
+      styles: const PosStyles(align: PosAlign.right),
+    ),
+  ]);
+  bytes += generator.hr();
+  bytes += generator.row([
+    PosColumn(text: 'Penjualan Payment Gateway/QRIS Randu Wallet', width: 6),
+    PosColumn(text: ':', width: 1),
+    PosColumn(
+      text: formatStringIDRToCurrency(
+          text: '${(data['pg'] ?? 0)}', symbol: 'Rp '),
+      width: 5,
+      styles: const PosStyles(align: PosAlign.right),
+    ),
+  ]);
+  bytes += generator.hr();
+  bytes += generator.row([
+    PosColumn(
+        text: 'Penjualan Transfer Rekening/EDC/QRIS/Toko (Cek Manual)',
+        width: 6),
+    PosColumn(text: ':', width: 1),
+    PosColumn(
+      text: formatStringIDRToCurrency(
+          text: '${(data['transfer'] ?? 0)}', symbol: 'Rp '),
+      width: 5,
+      styles: const PosStyles(align: PosAlign.right),
+    ),
+  ]);
+
+  for (var i = 0; i < data['banks'].length; i++) {
+    bytes += generator.row([
+      PosColumn(text: data['banks'][i]['bank'].toString(), width: 6),
+      PosColumn(text: ':', width: 1),
+      PosColumn(
+        text: formatStringIDRToCurrency(
+            text: '${(data['banks'][i]['perbank'] ?? 0)}', symbol: 'Rp '),
+        width: 5,
+        styles: const PosStyles(align: PosAlign.right),
+      ),
+    ]);
+
+    var items = data['banks'][i]['flags'];
+    for (var a = 0; a < items.length; a++) {
+      bytes += generator.row([
+        PosColumn(text: '- ${items[a]['flag']}', width: 6),
+        PosColumn(text: ':', width: 1),
+        PosColumn(
+          text: formatStringIDRToCurrency(
+              text: '${(items[a]['perflag'] ?? 0)}', symbol: 'Rp '),
+          width: 5,
+          styles: const PosStyles(align: PosAlign.right),
+        ),
+      ]);
+    }
+  }
+
+  bytes += generator.hr();
+  bytes += generator.row([
+    PosColumn(text: 'Penjualan Piutang/Kasbon', width: 6),
+    PosColumn(text: ':', width: 1),
+    PosColumn(
+      text: formatStringIDRToCurrency(
+          text: '${(data['piutang'] ?? 0)}', symbol: 'Rp '),
+      width: 5,
+      styles: const PosStyles(align: PosAlign.right),
+    ),
+  ]);
+  for (var i = 0; i < data['kasbon'].length; i++) {
+    bytes += generator.row([
+      PosColumn(text: data['kasbon'][i]['method'], width: 6),
+      PosColumn(text: ':', width: 1),
+      PosColumn(
+        text: formatStringIDRToCurrency(
+            text: '${(data['kasbon'][i]['perkasbon'] ?? 0)}', symbol: 'Rp '),
+        width: 5,
+        styles: const PosStyles(align: PosAlign.right),
+      ),
+    ]);
+
+    var items = data['kasbon'][i]['flags'];
+    for (var a = 0; a < items.length; a++) {
+      bytes += generator.row([
+        PosColumn(text: '- ${items[a]['flag']}', width: 6),
+        PosColumn(text: ':', width: 1),
+        PosColumn(
+          text: formatStringIDRToCurrency(
+              text: '${(items[a]['perflag'] ?? 0)}', symbol: 'Rp '),
+          width: 5,
+          styles: const PosStyles(align: PosAlign.right),
+        ),
+      ]);
+    }
+  }
+
+  bytes += generator.hr();
+  bytes += generator.row([
+    PosColumn(text: 'Total Penjualan Tunai', width: 6),
+    PosColumn(text: ':', width: 1),
+    PosColumn(
+      text: formatStringIDRToCurrency(
+          text: '${(data['tunai'] ?? 0)}', symbol: 'Rp '),
+      width: 5,
+      styles: const PosStyles(align: PosAlign.right),
+    ),
+  ]);
+  bytes += generator.hr();
+  bytes += generator.row([
+    PosColumn(text: 'Total Penjualan Non Tunai', width: 6),
+    PosColumn(text: ':', width: 1),
+    PosColumn(
+      text: formatStringIDRToCurrency(
+          text: '${(data['omset'] - data['tunai'] ?? 0)}', symbol: 'Rp '),
+      width: 5,
+      styles: const PosStyles(align: PosAlign.right),
+    ),
+  ]);
+  bytes += generator.hr();
+  bytes += generator.row([
+    PosColumn(text: 'Total Penjualan Tunai + Kas Awal', width: 6),
+    PosColumn(text: ':', width: 1),
+    PosColumn(
+      text: formatStringIDRToCurrency(
+          text:
+              '${(data['kas_kecil']['initial_cash_amount'] + data['tunai'] ?? 0)}',
+          symbol: 'Rp '),
+      width: 5,
+      styles: const PosStyles(align: PosAlign.right),
+    ),
+  ]);
+  bytes += generator.hr();
+  bytes += generator.row([
+    PosColumn(text: 'Pengeluaran Outlet', width: 6),
+    PosColumn(text: ':', width: 1),
+    PosColumn(
+      text: formatStringIDRToCurrency(
+          text: '${(data['outlet_output'] ?? 0)}', symbol: 'Rp '),
+      width: 5,
+      styles: const PosStyles(align: PosAlign.right),
+    ),
+  ]);
+  bytes += generator.hr();
+  bytes += generator.row([
+    PosColumn(text: 'Saldo Akhir Kas Awal', width: 6),
+    PosColumn(text: ':', width: 1),
+    PosColumn(
+      text: formatStringIDRToCurrency(
+          text:
+              '${(data['kas_kecil']['initial_cash_amount'] + data['tunai'] - data['outlet_output'] ?? 0)}',
+          symbol: 'Rp '),
+      width: 5,
+      styles: const PosStyles(align: PosAlign.right),
+    ),
+  ]);
+  bytes += generator.hr();
+  bytes += generator.row([
+    PosColumn(text: 'Omset Penjualan', width: 6),
+    PosColumn(text: ':', width: 1),
+    PosColumn(
+      text: formatStringIDRToCurrency(
+          text: '${(data['omset'] ?? 0)}', symbol: 'Rp '),
+      width: 5,
       styles: const PosStyles(align: PosAlign.right),
     ),
   ]);
 
   bytes += generator.hr();
 
-  bytes += generator.text('Terima kasih!',
+  bytes += generator.text('*Rekapitulasi Harian*',
       styles: const PosStyles(align: PosAlign.center));
   bytes += generator.cut();
 
