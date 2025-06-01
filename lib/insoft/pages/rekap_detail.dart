@@ -4,10 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/const/colors.dart';
 import '../../core/utils/currency_utils.dart';
-import '../../core/utils/date_utils.dart';
 import '../../domain/entities/printer/paper_size.dart';
 import '../../domain/entities/printer/printer_mode_enum.dart';
-import '../../domain/entities/report/daily_recap/daily_recap_model.dart';
 import '../../presentation/pages/receipt/receipt_utils.dart';
 import '../../presentation/providers/main/printer/multi_printer/printer_multi_provider.dart';
 import '../../presentation/providers/main/printer/printer_service_provider.dart';
@@ -74,11 +72,11 @@ class RekapDetail extends StatelessWidget {
 
                     await Future.delayed(const Duration(milliseconds: 100));
 
-                    // ref.read(printerServiceProvider.notifier).printTicket(
-                    //     receiptBytes: await generateDailyRecap(
-                    //         paperSize: paperSize?.size ?? PaperSize.mm80,
-                    //         capabilityProfile: capabilityProfile,
-                    //         data: dailyRecapItem));
+                    ref.read(printerServiceProvider.notifier).printTicket(
+                        receiptBytes: await generateDailyRecap2(
+                            paperSize: paperSize?.size ?? PaperSize.mm80,
+                            capabilityProfile: capabilityProfile,
+                            data: dataList));
                   });
             });
       }),

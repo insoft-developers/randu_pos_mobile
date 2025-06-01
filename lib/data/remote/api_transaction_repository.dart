@@ -86,7 +86,7 @@ class ApiTransactionRepository implements ITransactionRepository {
           (model) => PaymentResponseData.fromJson(response.data['data']),
         ));
       } else {
-        return Result.failed(response.data['message']);
+        return Result.failed(response.data['detail']);
       }
       // await Future.delayed(const Duration(seconds: 3));
       // final examplePaymentResponse = PaymentResponseData(

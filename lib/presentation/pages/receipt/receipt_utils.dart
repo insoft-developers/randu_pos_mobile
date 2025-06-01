@@ -651,6 +651,87 @@ Future<List<int>> generateDailyRecap({
   return bytes;
 }
 
+Future<List<int>> generateDailyRecap2({
+  required PaperSize paperSize,
+  required CapabilityProfile capabilityProfile,
+  required Map<String, dynamic> data,
+}) async {
+  final profile = await CapabilityProfile.load();
+  final generator = Generator(paperSize, profile);
+  List<int> bytes = [];
+
+  bytes += generator.text(
+    'Rekap Harian',
+    styles: const PosStyles(
+      align: PosAlign.center,
+      bold: true,
+      height: PosTextSize.size2,
+      width: PosTextSize.size2,
+    ),
+    linesAfter: 1,
+  );
+
+  bytes += generator.hr();
+  bytes += generator.row([
+    PosColumn(text: 'Nama Toko', width: 5),
+    PosColumn(text: ':', width: 1),
+    PosColumn(
+      text: data['nama_toko'],
+      width: 6,
+      styles: const PosStyles(align: PosAlign.right),
+    ),
+  ]);
+
+  bytes += generator.row([
+    PosColumn(text: 'Nama Kasir', width: 5),
+    PosColumn(text: ':', width: 1),
+    PosColumn(
+      text: data['user']['fullname'] ?? '-',
+      width: 6,
+      styles: const PosStyles(align: PosAlign.right),
+    ),
+  ]);
+
+  bytes += generator.row([
+    PosColumn(text: 'Buka', width: 5),
+    PosColumn(text: ':', width: 1),
+    PosColumn(
+      text: data['kas_kecil']['open_cashier_at'] ?? '-',
+      width: 6,
+      styles: const PosStyles(align: PosAlign.right),
+    ),
+  ]);
+
+  bytes += generator.row([
+    PosColumn(text: 'Tutup', width: 5),
+    PosColumn(text: ':', width: 1),
+    PosColumn(
+      text: data['kas_kecil']['close_cashier_at'] ?? '-',
+      width: 6,
+      styles: const PosStyles(align: PosAlign.right),
+    ),
+  ]);
+
+  bytes += generator.hr();
+  bytes += generator.row([
+    PosColumn(text: 'Kas Awal', width: 5),
+    PosColumn(text: ':', width: 1),
+    PosColumn(
+      text: data['kas_kecil']['initial_cash_amount'] ?? '-',
+      width: 6,
+      styles: const PosStyles(align: PosAlign.right),
+    ),
+  ]);
+
+  bytes += generator.hr();
+
+  bytes += generator.text('Terima kasih!',
+      styles: const PosStyles(align: PosAlign.center));
+  bytes += generator.cut();
+
+  return bytes;
+}
+
 Future<List<int>> openCashDrawer() async {
   print('open drawer');
   // Open cash drawer

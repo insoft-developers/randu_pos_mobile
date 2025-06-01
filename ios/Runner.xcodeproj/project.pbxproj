@@ -490,7 +490,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_TEAM = 4WTL8Q32G8;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
@@ -500,7 +500,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.randu.pos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -677,7 +677,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_TEAM = 4WTL8Q32G8;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
@@ -687,7 +687,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.randu.pos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -704,7 +704,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_TEAM = 4WTL8Q32G8;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
@@ -714,7 +714,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.randu.pos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";

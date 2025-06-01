@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 import '../../core/const/colors.dart';
 import '../../core/utils/date_utils.dart';
+import '../../presentation/pages/daily_recap/widget/loading/daily_recap_loading_mobile.dart';
 import '../../presentation/widgets/core/container/custom_rounded_container.dart';
 import '../../presentation/widgets/core/text/custom_text_style.dart';
 import '../../presentation/widgets/shared/header/report_header_mobile.dart';
@@ -88,10 +89,10 @@ class RekapMobile extends StatelessWidget {
                       ),
                       const SizedBox(height: 16),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height * 3 / 5,
+                        height: MediaQuery.of(context).size.height * 3 / 5 - 11,
                         child: Obx(
                           () => _rhc.loading.value
-                              ? const Center(child: Text('Loading'))
+                              ? const DailyRecapLoadingMobile()
                               : _rhc.rekapHarianData.isEmpty
                                   ? const Center(child: Text('Data tidak ada'))
                                   : ListView.builder(

@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
-import 'package:intl/intl.dart';
 
 import '../../domain/entities/user_model.dart';
 import '../network.dart';
@@ -10,8 +9,8 @@ import '../network.dart';
 class RekapHarianController extends GetxController {
   var rekapHarianData = List.empty().obs;
   var loading = false.obs;
-  var selectedDate = "".obs;
-  var todayDate = "".obs;
+  var selectedDate = ''.obs;
+  var todayDate = ''.obs;
 
   void changeSelectedDate(String date) {
     selectedDate.value = date;

@@ -9,7 +9,6 @@ import '../../../../core/const/log_page.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/misc/app_image.dart';
 import '../../../../domain/entities/user_model.dart';
-import '../../../../insoft/pages/rekap.dart';
 import '../../../providers/main/transaction_provider.dart';
 import '../text/custom_text.dart';
 import 'drawer_methods.dart';

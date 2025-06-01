@@ -1,7 +1,7 @@
 import 'dart:io';
 
 const bool isDev = true;
-const String versionCode = '2.2.1';
+const String versionCode = '2.3.1';
 const endpointDev = 'https://dev.randu.co.id';
 // const endpointDev = 'http://192.168.100.3/randu-api/public';
 
@@ -11,7 +11,7 @@ const endpointApi = '$endpoint/api/v2';
 const endpointStorage = '$endpointApp/storage/';
 const int pinLength = 6;
 const String versionApp = '$versionCode ${isDev ? '- Dev' : ''}';
-String dateBuild = '25 Februari 2025';
+String dateBuild = '25 April 2025';
 const anonKey = String.fromEnvironment('ANON_KEY');
 const String authBoxName = 'auth';
 const String noImage =
