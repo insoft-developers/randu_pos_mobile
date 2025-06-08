@@ -55,6 +55,7 @@ _$TransactionManagementModelImpl _$$TransactionManagementModelImplFromJson(
       note: json['note'] as String?,
       table: json['table'] as String?,
       priceType: json['price_type'] as String?,
+      paymentAmount: (json['payment_amount'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$TransactionManagementModelImplToJson(
@@ -95,4 +96,5 @@ Map<String, dynamic> _$$TransactionManagementModelImplToJson(
       'note': instance.note,
       'table': instance.table,
       'price_type': instance.priceType,
+      'payment_amount': instance.paymentAmount,
     };

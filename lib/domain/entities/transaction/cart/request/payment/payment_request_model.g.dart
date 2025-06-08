@@ -38,13 +38,14 @@ class PaymentRequestModelAdapter
       instantQris: fields[15] == null ? false : fields[15] as bool,
       isRounded: fields[16] == null ? false : fields[16] as bool,
       flag: fields[17] as String?,
+      paymentAmount: (fields[18] as num).toDouble(),
     );
   }
 
   @override
   void write(BinaryWriter writer, _$PaymentRequestModelImpl obj) {
     writer
-      ..writeByte(18)
+      ..writeByte(19)
       ..writeByte(0)
       ..write(obj.customer)
       ..writeByte(1)
@@ -80,7 +81,9 @@ class PaymentRequestModelAdapter
       ..writeByte(16)
       ..write(obj.isRounded)
       ..writeByte(17)
-      ..write(obj.flag);
+      ..write(obj.flag)
+      ..writeByte(18)
+      ..write(obj.paymentAmount);
   }
 
   @override
@@ -122,6 +125,7 @@ _$PaymentRequestModelImpl _$$PaymentRequestModelImplFromJson(
       instantQris: json['instant_qris'] as bool? ?? false,
       isRounded: json['is_rounded'] as bool? ?? false,
       flag: json['flag'] as String?,
+      paymentAmount: (json['payment_amount'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$$PaymentRequestModelImplToJson(
@@ -145,6 +149,7 @@ Map<String, dynamic> _$$PaymentRequestModelImplToJson(
       'instant_qris': instance.instantQris,
       'is_rounded': instance.isRounded,
       'flag': instance.flag,
+      'payment_amount': instance.paymentAmount,
     };
 
 _$PaymentReceiptModelImpl _$$PaymentReceiptModelImplFromJson(
@@ -188,6 +193,7 @@ _$PaymentReceiptModelImpl _$$PaymentReceiptModelImplFromJson(
       roundedTotal: json['roundedTotal'] as String?,
       isRounded: json['isRounded'] as bool?,
       flag: json['flag'] as String?,
+      paymentAmount: (json['payment_amount'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$$PaymentReceiptModelImplToJson(
@@ -226,6 +232,7 @@ Map<String, dynamic> _$$PaymentReceiptModelImplToJson(
       'roundedTotal': instance.roundedTotal,
       'isRounded': instance.isRounded,
       'flag': instance.flag,
+      'payment_amount': instance.paymentAmount,
     };
 
 const _$ReceiptFromEnumEnumMap = {

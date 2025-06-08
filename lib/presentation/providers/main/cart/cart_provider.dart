@@ -559,6 +559,7 @@ class Cart extends _$Cart {
         paymentRequest: PaymentRequestModel(
             customer: state.customer?.customer,
             paid: double.parse(state.totalPrice.toString()),
+            paymentAmount: double.parse(state.totalPaid?.toString() ?? '0.8'),
             orderTotal: state.subTotal,
             tax: state.subTotalWithTax ?? 0,
             qrCodeId: state.table?.qrId,

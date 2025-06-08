@@ -48,6 +48,7 @@ class TransactionManagementModel with _$TransactionManagementModel {
     @JsonKey(name: 'note') String? note,
     @JsonKey(name: 'table') String? table,
     @JsonKey(name: 'price_type') String? priceType,
+    @JsonKey(name: 'payment_amount') int? paymentAmount,
   }) = _TransactionManagementModel;
 
   // String get statusString {
@@ -120,6 +121,7 @@ extension TransactionManagementModelExtensions on TransactionManagementModel {
       statusPayment: paymentStatus,
       paymentReturnUrl: paymentReturnUrl,
       priceType: priceType,
+      paymentAmount: paymentAmount?.toDouble() ?? 0,
     );
   }
 }

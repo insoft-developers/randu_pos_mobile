@@ -131,6 +131,10 @@ class CartState with _$CartState {
   double get changePrice {
     return totalPrice - (totalPaid ?? 0);
   }
+
+  double get paymentAmount {
+    return totalPaid ?? 0;
+  }
 }
 
 extension CartStateExtensions on CartState {
@@ -158,8 +162,9 @@ extension CartStateExtensions on CartState {
     return PaymentRequestModel(
       customer: customer?.customer ?? 'Walk In Customer',
       paid: double.parse(totalPrice.toString()),
+      paymentAmount: paymentAmount ?? 0,
       orderTotal: subTotal,
-      tax: subTotalWithTax??0,
+      tax: subTotalWithTax ?? 0,
       qrCodeId: table == null ? null : (table?.id.toString()),
       branchId: user?.branchId == null ? null : (user?.branchId.toString()),
       staffId: user?.id.toString(),
@@ -206,6 +211,7 @@ extension CartStateExtensions on CartState {
       priceType: saleType,
       roundedTotal: roundedTotal,
       isRounded: user?.isRounded ?? false,
+      paymentAmount: paymentAmount,
     );
   }
 }

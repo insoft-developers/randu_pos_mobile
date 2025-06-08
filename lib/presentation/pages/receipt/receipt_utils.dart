@@ -127,7 +127,7 @@ extension PaymentReceiptModelExtensions on PaymentReceiptModel {
     bool isCashier = false,
     bool isPrintAllProductChecker = false,
   }) async {
-    final PaymentMethodController _payment = Get.put(PaymentMethodController());
+    final PaymentMethodController payment = Get.put(PaymentMethodController());
     final Generator ticket = Generator(paperSize, capabilityProfile);
     List<int> bytes = [];
     void addRowToTicket(String label, String value) {
@@ -155,11 +155,12 @@ extension PaymentReceiptModelExtensions on PaymentReceiptModel {
 
     // Business Information
     bytes += ticket.text(
-      formatPrinterText(businessName, paperSize == PaperSize.mm80 ? 20 : 16),
+      formatPrinterText(businessName, paperSize == PaperSize.mm80 ? 40 : 32),
       styles: const PosStyles(
+        bold: true,
         align: PosAlign.center,
-        height: PosTextSize.size2,
-        width: PosTextSize.size2,
+        height: PosTextSize.size1,
+        width: PosTextSize.size1,
       ),
       linesAfter: 1,
     );
@@ -182,13 +183,23 @@ extension PaymentReceiptModelExtensions on PaymentReceiptModel {
         'KASIR',
         truncateWithEllipsis(
             staffName ?? '', paperSize == PaperSize.mm80 ? 24 : 18));
-    addRowToTicket('MEJA', table ?? '');
+    if (table != null) {
+      addRowToTicket('MEJA', table ?? '');
+    }
     addRowToTicket(
         'NAMA',
         truncateWithEllipsis(
             customer ?? '', paperSize == PaperSize.mm80 ? 24 : 18));
-    addRowToTicket('PEMBAYARAN', paymentMethod);
-    addRowToTicket('FLAG', _payment.selectedFlagName.value);
+    if (paymentMethod == 'kas') {
+      addRowToTicket('PEMBAYARAN', 'TUNAI');
+    } else {
+      addRowToTicket('PEMBAYARAN', paymentMethod);
+    }
+
+    if (payment.selectedFlagName.value == 'No Flag') {
+    } else {
+      addRowToTicket('FLAG', payment.selectedFlagName.value);
+    }
 
     bytes += ticket.hr();
 
@@ -337,7 +348,7 @@ extension PaymentReceiptModelExtensions on PaymentReceiptModel {
           roundedTotal!.isNotEmpty &&
           (isRounded ?? false)) {
         bytes += ticket.row([
-          PosColumn(text: 'Pembulatan', width: 7),
+          PosColumn(text: 'PEMBULATAN', width: 7),
           PosColumn(text: ':', width: 1),
           PosColumn(
               text: roundedTotal ?? '',
@@ -364,10 +375,80 @@ extension PaymentReceiptModelExtensions on PaymentReceiptModel {
           styles: const PosStyles(
             bold: true,
             align: PosAlign.right,
-            height: PosTextSize.size2,
-            width: PosTextSize.size2,
+            height: PosTextSize.size1,
+            width: PosTextSize.size1,
           ),
         ),
+      ]);
+
+      bytes += ticket.row([
+        PosColumn(
+          text: 'BAYAR ${paperSize == PaperSize.mm80 ? '' : ''}',
+          width: 4,
+          styles: const PosStyles(
+            bold: false,
+            height: PosTextSize.size1,
+            width: PosTextSize.size1,
+          ),
+        ),
+        paymentAmount == null || paymentAmount == 0
+            ? PosColumn(
+                text: formatStringIDRToCurrency(
+                    text: paid.toStringAsFixed(0), symbol: 'Rp '),
+                width: 8,
+                styles: const PosStyles(
+                  bold: false,
+                  align: PosAlign.right,
+                  height: PosTextSize.size1,
+                  width: PosTextSize.size1,
+                ),
+              )
+            : PosColumn(
+                text: formatStringIDRToCurrency(
+                    text: paymentAmount.toStringAsFixed(0), symbol: 'Rp '),
+                width: 8,
+                styles: const PosStyles(
+                  bold: false,
+                  align: PosAlign.right,
+                  height: PosTextSize.size1,
+                  width: PosTextSize.size1,
+                ),
+              ),
+      ]);
+
+      bytes += ticket.row([
+        PosColumn(
+          text: 'KEMBALIAN ${paperSize == PaperSize.mm80 ? '' : ''}',
+          width: 4,
+          styles: const PosStyles(
+            bold: true,
+            height: PosTextSize.size1,
+            width: PosTextSize.size1,
+          ),
+        ),
+        paymentAmount == null || paymentAmount == 0
+            ? PosColumn(
+                text: formatStringIDRToCurrency(text: '0', symbol: 'Rp '),
+                width: 8,
+                styles: const PosStyles(
+                  bold: true,
+                  align: PosAlign.right,
+                  height: PosTextSize.size1,
+                  width: PosTextSize.size1,
+                ),
+              )
+            : PosColumn(
+                text: formatStringIDRToCurrency(
+                    text: (paymentAmount - paid).toStringAsFixed(0),
+                    symbol: 'Rp '),
+                width: 8,
+                styles: const PosStyles(
+                  bold: true,
+                  align: PosAlign.right,
+                  height: PosTextSize.size1,
+                  width: PosTextSize.size1,
+                ),
+              ),
       ]);
 
       // Footer and Receipt Type

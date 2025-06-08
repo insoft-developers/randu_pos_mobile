@@ -118,15 +118,25 @@ class __$$SendPaymentStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SendPaymentStateImpl implements _SendPaymentState {
+class _$SendPaymentStateImpl
+    with DiagnosticableTreeMixin
+    implements _SendPaymentState {
   const _$SendPaymentStateImpl({this.response});
 
   @override
   final GeneralResponse<PaymentResponseData>? response;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'SendPaymentState(response: $response)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'SendPaymentState'))
+      ..add(DiagnosticsProperty('response', response));
   }
 
   @override

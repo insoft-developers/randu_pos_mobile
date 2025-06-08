@@ -12,6 +12,7 @@ class PaymentMethodController extends GetxController {
   var selectedFlagRow = <String, dynamic>{}.obs;
   var selectedFlagId = ''.obs;
   var selectedFlagName = 'No Flag'.obs;
+  var totalPaid = 0.0.obs;
 
   void setSelectedFlag(Map<String, dynamic> pilihan) {
     selectedFlagRow.value = pilihan;

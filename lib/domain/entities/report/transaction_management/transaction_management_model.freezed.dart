@@ -91,6 +91,8 @@ mixin _$TransactionManagementModel {
   String? get table => throw _privateConstructorUsedError;
   @JsonKey(name: 'price_type')
   String? get priceType => throw _privateConstructorUsedError;
+  @JsonKey(name: 'payment_amount')
+  int? get paymentAmount => throw _privateConstructorUsedError;
 
   /// Serializes this TransactionManagementModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -144,7 +146,8 @@ abstract class $TransactionManagementModelCopyWith<$Res> {
       @JsonKey(name: 'flip_ref') String? flipRef,
       @JsonKey(name: 'note') String? note,
       @JsonKey(name: 'table') String? table,
-      @JsonKey(name: 'price_type') String? priceType});
+      @JsonKey(name: 'price_type') String? priceType,
+      @JsonKey(name: 'payment_amount') int? paymentAmount});
 }
 
 /// @nodoc
@@ -198,6 +201,7 @@ class _$TransactionManagementModelCopyWithImpl<$Res,
     Object? note = freezed,
     Object? table = freezed,
     Object? priceType = freezed,
+    Object? paymentAmount = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -340,6 +344,10 @@ class _$TransactionManagementModelCopyWithImpl<$Res,
           ? _value.priceType
           : priceType // ignore: cast_nullable_to_non_nullable
               as String?,
+      paymentAmount: freezed == paymentAmount
+          ? _value.paymentAmount
+          : paymentAmount // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -388,7 +396,8 @@ abstract class _$$TransactionManagementModelImplCopyWith<$Res>
       @JsonKey(name: 'flip_ref') String? flipRef,
       @JsonKey(name: 'note') String? note,
       @JsonKey(name: 'table') String? table,
-      @JsonKey(name: 'price_type') String? priceType});
+      @JsonKey(name: 'price_type') String? priceType,
+      @JsonKey(name: 'payment_amount') int? paymentAmount});
 }
 
 /// @nodoc
@@ -441,6 +450,7 @@ class __$$TransactionManagementModelImplCopyWithImpl<$Res>
     Object? note = freezed,
     Object? table = freezed,
     Object? priceType = freezed,
+    Object? paymentAmount = freezed,
   }) {
     return _then(_$TransactionManagementModelImpl(
       id: freezed == id
@@ -583,6 +593,10 @@ class __$$TransactionManagementModelImplCopyWithImpl<$Res>
           ? _value.priceType
           : priceType // ignore: cast_nullable_to_non_nullable
               as String?,
+      paymentAmount: freezed == paymentAmount
+          ? _value.paymentAmount
+          : paymentAmount // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -625,7 +639,8 @@ class _$TransactionManagementModelImpl extends _TransactionManagementModel {
       @JsonKey(name: 'flip_ref') this.flipRef,
       @JsonKey(name: 'note') this.note,
       @JsonKey(name: 'table') this.table,
-      @JsonKey(name: 'price_type') this.priceType})
+      @JsonKey(name: 'price_type') this.priceType,
+      @JsonKey(name: 'payment_amount') this.paymentAmount})
       : _products = products,
         super._();
 
@@ -746,10 +761,13 @@ class _$TransactionManagementModelImpl extends _TransactionManagementModel {
   @override
   @JsonKey(name: 'price_type')
   final String? priceType;
+  @override
+  @JsonKey(name: 'payment_amount')
+  final int? paymentAmount;
 
   @override
   String toString() {
-    return 'TransactionManagementModel(id: $id, reference: $reference, date: $date, customerId: $customerId, custName: $custName, custPhone: $custPhone, custEmail: $custEmail, custKecamatan: $custKecamatan, custKelurahan: $custKelurahan, custAlamat: $custAlamat, detail: $detail, products: $products, paid: $paid, status: $status, paymentStatus: $paymentStatus, paymentAt: $paymentAt, paymentMethod: $paymentMethod, paymentReturnUrl: $paymentReturnUrl, qrCodesId: $qrCodesId, branchId: $branchId, staffId: $staffId, staffName: $staffName, syncStatus: $syncStatus, created: $created, userId: $userId, diskon: $diskon, shipping: $shipping, orderTotal: $orderTotal, tax: $tax, createdAt: $createdAt, updatedAt: $updatedAt, flipRef: $flipRef, note: $note, table: $table, priceType: $priceType)';
+    return 'TransactionManagementModel(id: $id, reference: $reference, date: $date, customerId: $customerId, custName: $custName, custPhone: $custPhone, custEmail: $custEmail, custKecamatan: $custKecamatan, custKelurahan: $custKelurahan, custAlamat: $custAlamat, detail: $detail, products: $products, paid: $paid, status: $status, paymentStatus: $paymentStatus, paymentAt: $paymentAt, paymentMethod: $paymentMethod, paymentReturnUrl: $paymentReturnUrl, qrCodesId: $qrCodesId, branchId: $branchId, staffId: $staffId, staffName: $staffName, syncStatus: $syncStatus, created: $created, userId: $userId, diskon: $diskon, shipping: $shipping, orderTotal: $orderTotal, tax: $tax, createdAt: $createdAt, updatedAt: $updatedAt, flipRef: $flipRef, note: $note, table: $table, priceType: $priceType, paymentAmount: $paymentAmount)';
   }
 
   @override
@@ -812,7 +830,9 @@ class _$TransactionManagementModelImpl extends _TransactionManagementModel {
             (identical(other.note, note) || other.note == note) &&
             (identical(other.table, table) || other.table == table) &&
             (identical(other.priceType, priceType) ||
-                other.priceType == priceType));
+                other.priceType == priceType) &&
+            (identical(other.paymentAmount, paymentAmount) ||
+                other.paymentAmount == paymentAmount));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -853,7 +873,8 @@ class _$TransactionManagementModelImpl extends _TransactionManagementModel {
         flipRef,
         note,
         table,
-        priceType
+        priceType,
+        paymentAmount
       ]);
 
   /// Create a copy of TransactionManagementModel
@@ -909,7 +930,8 @@ abstract class _TransactionManagementModel extends TransactionManagementModel {
           @JsonKey(name: 'flip_ref') final String? flipRef,
           @JsonKey(name: 'note') final String? note,
           @JsonKey(name: 'table') final String? table,
-          @JsonKey(name: 'price_type') final String? priceType}) =
+          @JsonKey(name: 'price_type') final String? priceType,
+          @JsonKey(name: 'payment_amount') final int? paymentAmount}) =
       _$TransactionManagementModelImpl;
   _TransactionManagementModel._() : super._();
 
@@ -1021,6 +1043,9 @@ abstract class _TransactionManagementModel extends TransactionManagementModel {
   @override
   @JsonKey(name: 'price_type')
   String? get priceType;
+  @override
+  @JsonKey(name: 'payment_amount')
+  int? get paymentAmount;
 
   /// Create a copy of TransactionManagementModel
   /// with the given fields replaced by the non-null parameter values.

@@ -44,6 +44,9 @@ class PaymentRequestModel with _$PaymentRequestModel {
     bool instantQris,
     @HiveField(16) @JsonKey(name: 'is_rounded') @Default(false) bool isRounded,
     @HiveField(17) @JsonKey(name: 'flag') String? flag,
+    @HiveField(18)
+    @JsonKey(name: 'payment_amount')
+    required double paymentAmount,
   }) = _PaymentRequestModel;
 
   factory PaymentRequestModel.fromJson(Map<String, dynamic> json) =>
@@ -86,6 +89,7 @@ class PaymentReceiptModel with _$PaymentReceiptModel {
     String? roundedTotal,
     bool? isRounded,
     @JsonKey(name: 'flag') String? flag,
+    @JsonKey(name: 'payment_amount') required double paymentAmount,
   }) = _PaymentReceiptModel;
 
   factory PaymentReceiptModel.fromJson(Map<String, dynamic> json) =>

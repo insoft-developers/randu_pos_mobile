@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import '../../../../data/repositories/i_transaction_repository.dart';
 import '../../../entities/general_response.dart';
 import '../../../entities/result.dart';
@@ -18,6 +20,7 @@ class SendPaymentUC
   Future<Result<GeneralResponse<PaymentResponseData>>> call(
       PaymentRequestModel request) async {
     var result = await _repository.sendPayment(request);
+    debugPrint('request baru ${request.toJson()} ', wrapWidth: 1024);
     return result;
   }
 }

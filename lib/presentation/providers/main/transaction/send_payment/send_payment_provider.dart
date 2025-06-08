@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -20,6 +21,8 @@ class SendPayment extends _$SendPayment {
   }
 
   Future<void> sendPayment(PaymentRequestModel request) async {
+    // debugPrint('request baru ${request.toJson()} ', wrapWidth: 1024);
+    // return;
     print('send payment');
     state = const AsyncLoading();
     SendPaymentUC sendPaymentUC = ref.read(sendPaymentUCProvider);

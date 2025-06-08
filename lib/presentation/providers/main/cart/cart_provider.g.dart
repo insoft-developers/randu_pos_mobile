@@ -183,7 +183,7 @@ class CartStateAdapter extends TypeAdapter<_$CartStateImpl> {
 // RiverpodGenerator
 // **************************************************************************
 
-String _$cartHash() => r'879bf0b16b50c94d7ee96ab9b9c39bb04e22cfc6';
+String _$cartHash() => r'867cabc683de941e4e79c152e7ed53b1b18beb06';
 
 /// See also [Cart].
 @ProviderFor(Cart)

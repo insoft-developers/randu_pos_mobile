@@ -7,7 +7,7 @@ part of 'payment_method_selection_provider.dart';
 // **************************************************************************
 
 String _$paymentMethodSelectionHash() =>
-    r'f7125cfe7f66b2a9cb1cf5d57d26281526d6367b';
+    r'9344ff0f14ccafe6a1672e43c1db606b0a29a30b';
 
 /// See also [PaymentMethodSelection].
 @ProviderFor(PaymentMethodSelection)

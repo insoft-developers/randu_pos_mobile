@@ -72,6 +72,9 @@ mixin _$PaymentRequestModel {
   @HiveField(17)
   @JsonKey(name: 'flag')
   String? get flag => throw _privateConstructorUsedError;
+  @HiveField(18)
+  @JsonKey(name: 'payment_amount')
+  double get paymentAmount => throw _privateConstructorUsedError;
 
   /// Serializes this PaymentRequestModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -107,7 +110,8 @@ abstract class $PaymentRequestModelCopyWith<$Res> {
       @HiveField(14) @JsonKey(name: 'price_type') String saleType,
       @HiveField(15) @JsonKey(name: 'instant_qris') bool instantQris,
       @HiveField(16) @JsonKey(name: 'is_rounded') bool isRounded,
-      @HiveField(17) @JsonKey(name: 'flag') String? flag});
+      @HiveField(17) @JsonKey(name: 'flag') String? flag,
+      @HiveField(18) @JsonKey(name: 'payment_amount') double paymentAmount});
 }
 
 /// @nodoc
@@ -143,6 +147,7 @@ class _$PaymentRequestModelCopyWithImpl<$Res, $Val extends PaymentRequestModel>
     Object? instantQris = null,
     Object? isRounded = null,
     Object? flag = freezed,
+    Object? paymentAmount = null,
   }) {
     return _then(_value.copyWith(
       customer: freezed == customer
@@ -217,6 +222,10 @@ class _$PaymentRequestModelCopyWithImpl<$Res, $Val extends PaymentRequestModel>
           ? _value.flag
           : flag // ignore: cast_nullable_to_non_nullable
               as String?,
+      paymentAmount: null == paymentAmount
+          ? _value.paymentAmount
+          : paymentAmount // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -247,7 +256,8 @@ abstract class _$$PaymentRequestModelImplCopyWith<$Res>
       @HiveField(14) @JsonKey(name: 'price_type') String saleType,
       @HiveField(15) @JsonKey(name: 'instant_qris') bool instantQris,
       @HiveField(16) @JsonKey(name: 'is_rounded') bool isRounded,
-      @HiveField(17) @JsonKey(name: 'flag') String? flag});
+      @HiveField(17) @JsonKey(name: 'flag') String? flag,
+      @HiveField(18) @JsonKey(name: 'payment_amount') double paymentAmount});
 }
 
 /// @nodoc
@@ -281,6 +291,7 @@ class __$$PaymentRequestModelImplCopyWithImpl<$Res>
     Object? instantQris = null,
     Object? isRounded = null,
     Object? flag = freezed,
+    Object? paymentAmount = null,
   }) {
     return _then(_$PaymentRequestModelImpl(
       customer: freezed == customer
@@ -355,6 +366,10 @@ class __$$PaymentRequestModelImplCopyWithImpl<$Res>
           ? _value.flag
           : flag // ignore: cast_nullable_to_non_nullable
               as String?,
+      paymentAmount: null == paymentAmount
+          ? _value.paymentAmount
+          : paymentAmount // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -385,7 +400,10 @@ class _$PaymentRequestModelImpl implements _PaymentRequestModel {
       @HiveField(14) @JsonKey(name: 'price_type') this.saleType = 'price',
       @HiveField(15) @JsonKey(name: 'instant_qris') this.instantQris = false,
       @HiveField(16) @JsonKey(name: 'is_rounded') this.isRounded = false,
-      @HiveField(17) @JsonKey(name: 'flag') this.flag})
+      @HiveField(17) @JsonKey(name: 'flag') this.flag,
+      @HiveField(18)
+      @JsonKey(name: 'payment_amount')
+      required this.paymentAmount})
       : _products = products;
 
   factory _$PaymentRequestModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -469,10 +487,14 @@ class _$PaymentRequestModelImpl implements _PaymentRequestModel {
   @HiveField(17)
   @JsonKey(name: 'flag')
   final String? flag;
+  @override
+  @HiveField(18)
+  @JsonKey(name: 'payment_amount')
+  final double paymentAmount;
 
   @override
   String toString() {
-    return 'PaymentRequestModel(customer: $customer, paid: $paid, orderTotal: $orderTotal, tax: $tax, paymentMethod: $paymentMethod, qrCodeId: $qrCodeId, branchId: $branchId, staffId: $staffId, shipping: $shipping, discount: $discount, discountId: $discountId, returnUrl: $returnUrl, products: $products, from: $from, saleType: $saleType, instantQris: $instantQris, isRounded: $isRounded, flag: $flag)';
+    return 'PaymentRequestModel(customer: $customer, paid: $paid, orderTotal: $orderTotal, tax: $tax, paymentMethod: $paymentMethod, qrCodeId: $qrCodeId, branchId: $branchId, staffId: $staffId, shipping: $shipping, discount: $discount, discountId: $discountId, returnUrl: $returnUrl, products: $products, from: $from, saleType: $saleType, instantQris: $instantQris, isRounded: $isRounded, flag: $flag, paymentAmount: $paymentAmount)';
   }
 
   @override
@@ -509,31 +531,35 @@ class _$PaymentRequestModelImpl implements _PaymentRequestModel {
                 other.instantQris == instantQris) &&
             (identical(other.isRounded, isRounded) ||
                 other.isRounded == isRounded) &&
-            (identical(other.flag, flag) || other.flag == flag));
+            (identical(other.flag, flag) || other.flag == flag) &&
+            (identical(other.paymentAmount, paymentAmount) ||
+                other.paymentAmount == paymentAmount));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      customer,
-      paid,
-      orderTotal,
-      tax,
-      paymentMethod,
-      qrCodeId,
-      branchId,
-      staffId,
-      shipping,
-      discount,
-      discountId,
-      returnUrl,
-      const DeepCollectionEquality().hash(_products),
-      from,
-      saleType,
-      instantQris,
-      isRounded,
-      flag);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        customer,
+        paid,
+        orderTotal,
+        tax,
+        paymentMethod,
+        qrCodeId,
+        branchId,
+        staffId,
+        shipping,
+        discount,
+        discountId,
+        returnUrl,
+        const DeepCollectionEquality().hash(_products),
+        from,
+        saleType,
+        instantQris,
+        isRounded,
+        flag,
+        paymentAmount
+      ]);
 
   /// Create a copy of PaymentRequestModel
   /// with the given fields replaced by the non-null parameter values.
@@ -577,9 +603,10 @@ abstract class _PaymentRequestModel implements PaymentRequestModel {
       @HiveField(14) @JsonKey(name: 'price_type') final String saleType,
       @HiveField(15) @JsonKey(name: 'instant_qris') final bool instantQris,
       @HiveField(16) @JsonKey(name: 'is_rounded') final bool isRounded,
-      @HiveField(17)
-      @JsonKey(name: 'flag')
-      final String? flag}) = _$PaymentRequestModelImpl;
+      @HiveField(17) @JsonKey(name: 'flag') final String? flag,
+      @HiveField(18)
+      @JsonKey(name: 'payment_amount')
+      required final double paymentAmount}) = _$PaymentRequestModelImpl;
 
   factory _PaymentRequestModel.fromJson(Map<String, dynamic> json) =
       _$PaymentRequestModelImpl.fromJson;
@@ -654,6 +681,10 @@ abstract class _PaymentRequestModel implements PaymentRequestModel {
   @HiveField(17)
   @JsonKey(name: 'flag')
   String? get flag;
+  @override
+  @HiveField(18)
+  @JsonKey(name: 'payment_amount')
+  double get paymentAmount;
 
   /// Create a copy of PaymentRequestModel
   /// with the given fields replaced by the non-null parameter values.
@@ -717,6 +748,8 @@ mixin _$PaymentReceiptModel {
   bool? get isRounded => throw _privateConstructorUsedError;
   @JsonKey(name: 'flag')
   String? get flag => throw _privateConstructorUsedError;
+  @JsonKey(name: 'payment_amount')
+  double get paymentAmount => throw _privateConstructorUsedError;
 
   /// Serializes this PaymentReceiptModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -767,7 +800,8 @@ abstract class $PaymentReceiptModelCopyWith<$Res> {
       String? priceType,
       String? roundedTotal,
       bool? isRounded,
-      @JsonKey(name: 'flag') String? flag});
+      @JsonKey(name: 'flag') String? flag,
+      @JsonKey(name: 'payment_amount') double paymentAmount});
 }
 
 /// @nodoc
@@ -818,6 +852,7 @@ class _$PaymentReceiptModelCopyWithImpl<$Res, $Val extends PaymentReceiptModel>
     Object? roundedTotal = freezed,
     Object? isRounded = freezed,
     Object? flag = freezed,
+    Object? paymentAmount = null,
   }) {
     return _then(_value.copyWith(
       receiptFrom: null == receiptFrom
@@ -952,6 +987,10 @@ class _$PaymentReceiptModelCopyWithImpl<$Res, $Val extends PaymentReceiptModel>
           ? _value.flag
           : flag // ignore: cast_nullable_to_non_nullable
               as String?,
+      paymentAmount: null == paymentAmount
+          ? _value.paymentAmount
+          : paymentAmount // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -997,7 +1036,8 @@ abstract class _$$PaymentReceiptModelImplCopyWith<$Res>
       String? priceType,
       String? roundedTotal,
       bool? isRounded,
-      @JsonKey(name: 'flag') String? flag});
+      @JsonKey(name: 'flag') String? flag,
+      @JsonKey(name: 'payment_amount') double paymentAmount});
 }
 
 /// @nodoc
@@ -1046,6 +1086,7 @@ class __$$PaymentReceiptModelImplCopyWithImpl<$Res>
     Object? roundedTotal = freezed,
     Object? isRounded = freezed,
     Object? flag = freezed,
+    Object? paymentAmount = null,
   }) {
     return _then(_$PaymentReceiptModelImpl(
       receiptFrom: null == receiptFrom
@@ -1180,6 +1221,10 @@ class __$$PaymentReceiptModelImplCopyWithImpl<$Res>
           ? _value.flag
           : flag // ignore: cast_nullable_to_non_nullable
               as String?,
+      paymentAmount: null == paymentAmount
+          ? _value.paymentAmount
+          : paymentAmount // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -1220,7 +1265,8 @@ class _$PaymentReceiptModelImpl implements _PaymentReceiptModel {
       this.priceType,
       this.roundedTotal,
       this.isRounded,
-      @JsonKey(name: 'flag') this.flag})
+      @JsonKey(name: 'flag') this.flag,
+      @JsonKey(name: 'payment_amount') required this.paymentAmount})
       : _products = products;
 
   factory _$PaymentReceiptModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -1314,10 +1360,13 @@ class _$PaymentReceiptModelImpl implements _PaymentReceiptModel {
   @override
   @JsonKey(name: 'flag')
   final String? flag;
+  @override
+  @JsonKey(name: 'payment_amount')
+  final double paymentAmount;
 
   @override
   String toString() {
-    return 'PaymentReceiptModel(receiptFrom: $receiptFrom, referenceId: $referenceId, bussinessName: $bussinessName, bussinessAddress: $bussinessAddress, branchName: $branchName, printerConnection: $printerConnection, printerCustomFooter: $printerCustomFooter, customer: $customer, paid: $paid, orderTotal: $orderTotal, subTotal: $subTotal, tax: $tax, paymentMethod: $paymentMethod, qrCodeId: $qrCodeId, branchId: $branchId, staffId: $staffId, staffName: $staffName, shipping: $shipping, discount: $discount, discountId: $discountId, returnUrl: $returnUrl, products: $products, table: $table, createdAt: $createdAt, isFromCart: $isFromCart, status: $status, transactionId: $transactionId, statusPayment: $statusPayment, paymentReturnUrl: $paymentReturnUrl, priceType: $priceType, roundedTotal: $roundedTotal, isRounded: $isRounded, flag: $flag)';
+    return 'PaymentReceiptModel(receiptFrom: $receiptFrom, referenceId: $referenceId, bussinessName: $bussinessName, bussinessAddress: $bussinessAddress, branchName: $branchName, printerConnection: $printerConnection, printerCustomFooter: $printerCustomFooter, customer: $customer, paid: $paid, orderTotal: $orderTotal, subTotal: $subTotal, tax: $tax, paymentMethod: $paymentMethod, qrCodeId: $qrCodeId, branchId: $branchId, staffId: $staffId, staffName: $staffName, shipping: $shipping, discount: $discount, discountId: $discountId, returnUrl: $returnUrl, products: $products, table: $table, createdAt: $createdAt, isFromCart: $isFromCart, status: $status, transactionId: $transactionId, statusPayment: $statusPayment, paymentReturnUrl: $paymentReturnUrl, priceType: $priceType, roundedTotal: $roundedTotal, isRounded: $isRounded, flag: $flag, paymentAmount: $paymentAmount)';
   }
 
   @override
@@ -1383,7 +1432,9 @@ class _$PaymentReceiptModelImpl implements _PaymentReceiptModel {
                 other.roundedTotal == roundedTotal) &&
             (identical(other.isRounded, isRounded) ||
                 other.isRounded == isRounded) &&
-            (identical(other.flag, flag) || other.flag == flag));
+            (identical(other.flag, flag) || other.flag == flag) &&
+            (identical(other.paymentAmount, paymentAmount) ||
+                other.paymentAmount == paymentAmount));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1422,7 +1473,8 @@ class _$PaymentReceiptModelImpl implements _PaymentReceiptModel {
         priceType,
         roundedTotal,
         isRounded,
-        flag
+        flag,
+        paymentAmount
       ]);
 
   /// Create a copy of PaymentReceiptModel
@@ -1476,7 +1528,9 @@ abstract class _PaymentReceiptModel implements PaymentReceiptModel {
       final String? priceType,
       final String? roundedTotal,
       final bool? isRounded,
-      @JsonKey(name: 'flag') final String? flag}) = _$PaymentReceiptModelImpl;
+      @JsonKey(name: 'flag') final String? flag,
+      @JsonKey(name: 'payment_amount')
+      required final double paymentAmount}) = _$PaymentReceiptModelImpl;
 
   factory _PaymentReceiptModel.fromJson(Map<String, dynamic> json) =
       _$PaymentReceiptModelImpl.fromJson;
@@ -1562,6 +1616,9 @@ abstract class _PaymentReceiptModel implements PaymentReceiptModel {
   @override
   @JsonKey(name: 'flag')
   String? get flag;
+  @override
+  @JsonKey(name: 'payment_amount')
+  double get paymentAmount;
 
   /// Create a copy of PaymentReceiptModel
   /// with the given fields replaced by the non-null parameter values.
