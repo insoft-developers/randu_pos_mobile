@@ -60,10 +60,33 @@ class ProductModel with _$ProductModel {
     return bufferedStock == 1;
   }
 
+  // int get shadowStock {
+  //   if (quantity == null) return 0;
+  //   final stock = quantity! - (stockAlert ?? 0);
+  //   if (stock < 0) return 0;
+  //   return stock;
+  // }
+
   int get shadowStock {
-    if (quantity == null) return 0;
+    print('--- Debug shadowStock ---');
+    print('quantity: $quantity');
+    print('stockAlert: $stockAlert');
+
+    if (quantity == null) {
+      print('quantity is null, returning 0');
+      return 0;
+    }
+
     final stock = quantity! - (stockAlert ?? 0);
-    if (stock < 0) return 0;
+    // final stock = quantity!;
+    print('calculated stock: $stock');
+
+    if (stock < 0) {
+      print('stock is less than 0, returning 0');
+      return 0;
+    }
+
+    print('returning stock: $stock');
     return stock;
   }
 

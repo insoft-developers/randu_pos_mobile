@@ -40,7 +40,7 @@ class RekapMobile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Text(
-                        'Rekapitulasi Harian Advance',
+                        'Rekapitulasi Harian',
                         style: CustomTextStyle.h6Bold
                             .copyWith(color: Colors.blue[900]),
                       ),

@@ -183,7 +183,7 @@ extension PaymentReceiptModelExtensions on PaymentReceiptModel {
         'KASIR',
         truncateWithEllipsis(
             staffName ?? '', paperSize == PaperSize.mm80 ? 24 : 18));
-    if (table != null) {
+    if (table != null && table != '-') {
       addRowToTicket('MEJA', table ?? '');
     }
     addRowToTicket(
@@ -191,7 +191,25 @@ extension PaymentReceiptModelExtensions on PaymentReceiptModel {
         truncateWithEllipsis(
             customer ?? '', paperSize == PaperSize.mm80 ? 24 : 18));
     if (paymentMethod == 'kas') {
-      addRowToTicket('PEMBAYARAN', 'TUNAI');
+      addRowToTicket('PEMBAYARAN', 'Tunai');
+    } else if (paymentMethod == 'bank-bca') {
+      addRowToTicket('PEMBAYARAN', 'Bank BCA');
+    } else if (paymentMethod == 'bank-mandiri') {
+      addRowToTicket('PEMBAYARAN', 'Bank Mandiri');
+    } else if (paymentMethod == 'bank-bri') {
+      addRowToTicket('PEMBAYARAN', 'Bank BRI');
+    } else if (paymentMethod == 'bank-bni') {
+      addRowToTicket('PEMBAYARAN', 'Bank BNI');
+    } else if (paymentMethod == 'bank-lain') {
+      addRowToTicket('PEMBAYARAN', 'Bank Lain');
+    } else if (paymentMethod == 'piutang-usaha') {
+      addRowToTicket('PEMBAYARAN', 'Piutang');
+    } else if (paymentMethod == 'piutang-marketplace') {
+      addRowToTicket('PEMBAYARAN', 'Marketplace');
+    } else if (paymentMethod == 'piutang-cod') {
+      addRowToTicket('PEMBAYARAN', 'COD');
+    } else if (paymentMethod == 'randu-wallet') {
+      addRowToTicket('PEMBAYARAN', 'Randu Wallet');
     } else {
       addRowToTicket('PEMBAYARAN', paymentMethod);
     }
@@ -391,7 +409,7 @@ extension PaymentReceiptModelExtensions on PaymentReceiptModel {
             width: PosTextSize.size1,
           ),
         ),
-        paymentAmount == null || paymentAmount == 0
+        paymentAmount == 0
             ? PosColumn(
                 text: formatStringIDRToCurrency(
                     text: paid.toStringAsFixed(0), symbol: 'Rp '),
@@ -426,7 +444,7 @@ extension PaymentReceiptModelExtensions on PaymentReceiptModel {
             width: PosTextSize.size1,
           ),
         ),
-        paymentAmount == null || paymentAmount == 0
+        paymentAmount == 0
             ? PosColumn(
                 text: formatStringIDRToCurrency(text: '0', symbol: 'Rp '),
                 width: 8,

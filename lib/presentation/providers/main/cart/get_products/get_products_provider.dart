@@ -42,7 +42,8 @@ class GetProducts extends _$GetProducts {
             .fold(0, (total, item) => total + item.quantity);
 
         return product.copyWith(
-          quantity: product.shadowStock - cartQuantity,
+          // quantity: product.shadowStock - cartQuantity,
+          quantity: product.quantity ?? 0 - cartQuantity,
         );
       }).toList();
 
@@ -67,7 +68,8 @@ class GetProducts extends _$GetProducts {
                 .fold(0, (total, item) => total + item.quantity);
 
             return product.copyWith(
-              quantity: product.shadowStock - cartQuantity,
+              // quantity: product.shadowStock - cartQuantity,
+              quantity: (product.quantity ?? 0) - cartQuantity,
             );
           }).toList();
 

@@ -3,7 +3,7 @@ description: "Randu is a Point Of Sales App fot Staff"
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-version: 2.2.2+28
+version: 2.2.3+29
 
 environment:
   sdk: ">=3.2.0 <4.0.0"

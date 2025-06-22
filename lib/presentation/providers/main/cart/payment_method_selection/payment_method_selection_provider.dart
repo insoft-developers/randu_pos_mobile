@@ -1,11 +1,9 @@
-import 'package:collection/collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get/get.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../../domain/entities/transaction/cart/payment_method/payment_method_model.dart';
 import '../../../../../core/utils/currency_utils.dart';
-import '../../../../../insoft/controller/payment_method_controller.dart';
 import '../cart_provider.dart';
 import '../get_payment_methods/get_payment_methods_provider.dart';
 
