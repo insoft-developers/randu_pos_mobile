@@ -408,18 +408,22 @@ extension PaymentReceiptModelExtensions on PaymentReceiptModel {
               styles: const PosStyles(align: PosAlign.right)),
         ]);
       } else {
-        String? bulat = roundedTotal;
+        if (receiptFrom == ReceiptFromEnum.report) {
+          double bulat = paid - tax - subTotal - shipping + discount;
+          String bulatString = bulat.toString();
+          String result = bulatString.split('.').first;
 
-        String result = bulat != null ? bulat.split('.').first : '';
-
-        bytes += ticket.row([
-          PosColumn(text: 'PEMBULATAN', width: 6),
-          PosColumn(text: ':', width: 1),
-          PosColumn(
-              text: result,
-              width: 5,
-              styles: const PosStyles(align: PosAlign.right)),
-        ]);
+          if (bulat != '0') {
+            bytes += ticket.row([
+              PosColumn(text: 'PEMBULATAN', width: 6),
+              PosColumn(text: ':', width: 1),
+              PosColumn(
+                  text: result,
+                  width: 5,
+                  styles: const PosStyles(align: PosAlign.right)),
+            ]);
+          }
+        }
       }
       bytes += ticket.hr();
 

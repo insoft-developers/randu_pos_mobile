@@ -30,12 +30,16 @@ class PinHeaderMobile extends StatelessWidget {
         const SizedBox(
           height: 24,
         ),
-        const Text(
-          'PIN default 123123. Jika lupa PIN, silahkan reset PIN melalui Dashboard Web.',
-          style: TextStyle(
-            // color: Colors.white,
-            fontSize: 14,
-            fontWeight: FontWeight.normal,
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          child: const Text(
+            'PIN default 123123. Jika lupa PIN, silahkan reset PIN melalui Dashboard Web.',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              // color: Colors.white,
+              fontSize: 14,
+              fontWeight: FontWeight.normal,
+            ),
           ),
         ),
         const SizedBox(
