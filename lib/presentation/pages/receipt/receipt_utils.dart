@@ -130,6 +130,9 @@ extension PaymentReceiptModelExtensions on PaymentReceiptModel {
     final PaymentMethodController payment = Get.put(PaymentMethodController());
     final Generator ticket = Generator(paperSize, capabilityProfile);
     List<int> bytes = [];
+
+    print('DEBUG PaymentReceiptModel: $this');
+
     void addRowToTicket(String label, String value) {
       bytes += ticket.row([
         PosColumn(text: label, width: 4), // Label column width
@@ -322,55 +325,99 @@ extension PaymentReceiptModelExtensions on PaymentReceiptModel {
     if (!isCashier) {
       // Totals and Payment Details
       bytes += ticket.row([
-        PosColumn(text: 'SUBTOTAL ${products.length} PRODUK', width: 7),
+        PosColumn(text: 'SUBTOTAL', width: 6),
         PosColumn(text: ':', width: 1),
         PosColumn(
             text: formatStringIDRToCurrency(
                 text: subTotal.toStringAsFixed(0), symbol: 'Rp '),
-            width: 4,
+            width: 5,
             styles: const PosStyles(align: PosAlign.right)),
       ]);
 
       bytes += ticket.row([
-        PosColumn(text: 'DISKON (-)', width: 7),
+        PosColumn(text: ' ${products.length} PRODUK', width: 6),
+        PosColumn(text: '', width: 1),
+        PosColumn(
+            text: '', width: 5, styles: const PosStyles(align: PosAlign.right)),
+      ]);
+
+      bytes += ticket.row([
+        PosColumn(text: 'DISKON (-)', width: 6),
         PosColumn(text: ':', width: 1),
         PosColumn(
             text: formatStringIDRToCurrency(
                 text: discount.toStringAsFixed(0), symbol: 'Rp '),
-            width: 4,
+            width: 5,
             styles: const PosStyles(align: PosAlign.right)),
       ]);
 
       bytes += ticket.row([
-        PosColumn(text: 'ORDER FEE (+)', width: 7),
+        PosColumn(text: 'ORDER FEE (+)', width: 6),
         PosColumn(text: ':', width: 1),
         PosColumn(
             text: formatStringIDRToCurrency(
                 text: shipping.toStringAsFixed(0), symbol: 'Rp '),
-            width: 4,
+            width: 5,
             styles: const PosStyles(align: PosAlign.right)),
       ]);
 
       bytes += ticket.row([
-        PosColumn(text: 'TAX / PAJAK (+) $tax%', width: 7),
-        PosColumn(text: ':', width: 1),
+        PosColumn(text: 'TAX / PAJAK', width: 6),
+        PosColumn(text: '', width: 1),
         PosColumn(
-            text: formatStringIDRToCurrency(
-                text: (subTotal * tax / 100).toStringAsFixed(0), symbol: 'Rp '),
-            width: 4,
-            styles: const PosStyles(align: PosAlign.right)),
+            text: '', width: 5, styles: const PosStyles(align: PosAlign.right)),
       ]);
 
-      // Rounded total
-      if (roundedTotal != null &&
-          roundedTotal!.isNotEmpty &&
-          (isRounded ?? false)) {
+      if (receiptFrom == ReceiptFromEnum.report) {
+        double pajak = tax / subTotal * 100;
         bytes += ticket.row([
-          PosColumn(text: 'PEMBULATAN', width: 7),
+          PosColumn(text: '(+) $pajak%', width: 6),
           PosColumn(text: ':', width: 1),
           PosColumn(
-              text: roundedTotal ?? '',
-              width: 4,
+              text: formatStringIDRToCurrency(
+                  text: tax.toStringAsFixed(0), symbol: 'Rp '),
+              width: 5,
+              styles: const PosStyles(align: PosAlign.right)),
+        ]);
+      } else {
+        bytes += ticket.row([
+          PosColumn(text: '(+) $tax%', width: 6),
+          PosColumn(text: ':', width: 1),
+          PosColumn(
+              text: formatStringIDRToCurrency(
+                  text: (subTotal * tax / 100).toStringAsFixed(0),
+                  symbol: 'Rp '),
+              width: 5,
+              styles: const PosStyles(align: PosAlign.right)),
+        ]);
+      }
+
+      // Rounded total
+
+      if (roundedTotal != null && (isRounded ?? false)) {
+        String? bulat = roundedTotal;
+
+        String result = bulat != null ? bulat.split('.').first : '';
+
+        bytes += ticket.row([
+          PosColumn(text: 'PEMBULATAN', width: 6),
+          PosColumn(text: ':', width: 1),
+          PosColumn(
+              text: result,
+              width: 5,
+              styles: const PosStyles(align: PosAlign.right)),
+        ]);
+      } else {
+        String? bulat = roundedTotal;
+
+        String result = bulat != null ? bulat.split('.').first : '';
+
+        bytes += ticket.row([
+          PosColumn(text: 'PEMBULATAN', width: 6),
+          PosColumn(text: ':', width: 1),
+          PosColumn(
+              text: result,
+              width: 5,
               styles: const PosStyles(align: PosAlign.right)),
         ]);
       }

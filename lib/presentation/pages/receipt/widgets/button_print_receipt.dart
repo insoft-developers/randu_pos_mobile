@@ -40,6 +40,8 @@ class ButtonPrintReceipt extends ConsumerWidget {
 
   Widget _buildSinglePrinterMode(BuildContext context, WidgetRef ref,
       UserModel? user, PaymentReceiptModel cartPaymentReceipt) {
+    print('DEBUG cartPaymentReceipt: $cartPaymentReceipt');
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
