@@ -9,7 +9,7 @@ import '../network.dart';
 
 import 'package:get/get.dart';
 
-class PremiumController extends GetxController {
+class PremiunController extends GetxController {
   Future cekPremium(BuildContext context) async {
     final box = Hive.box<UserModel>('userBox');
 

@@ -24,7 +24,7 @@ class TransactionManagementItem extends StatelessWidget {
     final isVoid = transaction.paymentStatusEnum == StatusPaymentEnum.voids;
     return GestureDetector(
       onTap: () {
-        print('transaction.status: ${transaction.tax}');
+        // print('transaction.status: ${transaction.tax}');
         final cartPaymentReceipt = transaction.toPaymentReceipt(
           businessName: user?.bussinessName ?? '',
           bussinessAddress: user?.bussinessAddress ?? '',
@@ -32,6 +32,8 @@ class TransactionManagementItem extends StatelessWidget {
           footer: user?.footerReceipt ?? '',
           receiptFrom: ReceiptFromEnum.report,
         );
+        // print('user: $user');
+        // print('user?.branchName: ${user?.branchName}');
         context.pushNamed('printer_page', extra: cartPaymentReceipt);
       },
       child: CustomRoundedContainer(
@@ -79,7 +81,7 @@ class TransactionManagementItem extends StatelessWidget {
               children: [
                 CustomRoundedContainer(
                   shadow: const [],
-                  color: isVoid? Colors.red[200]: Colors.lightBlue[200],
+                  color: isVoid ? Colors.red[200] : Colors.lightBlue[200],
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                   margin: const EdgeInsets.all(0),
@@ -87,7 +89,7 @@ class TransactionManagementItem extends StatelessWidget {
                     transaction.statusEnum.name,
                     style:
                         CustomTextStyle.lightComponentsBadgeLabelBold.copyWith(
-                      color: isVoid?Colors.white:CustomColors.primaryColor,
+                      color: isVoid ? Colors.white : CustomColors.primaryColor,
                     ),
                   ),
                 ),

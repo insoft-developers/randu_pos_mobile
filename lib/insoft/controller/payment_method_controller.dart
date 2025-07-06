@@ -25,7 +25,7 @@ class PaymentMethodController extends GetxController {
     loading(true);
     final box = Hive.box<UserModel>('userBox');
     UserModel? userdata = box.getAt(0);
-    String? userid = userdata?.id.toString();
+    String? userid = userdata!.id.toString();
     var data = {'userid': userid, 'code': code};
 
     var res = await Network().auth(data, '/get_flag_data');

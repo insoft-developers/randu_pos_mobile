@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_ce/hive.dart';
 
 import '../../../core/const/colors.dart';
+import '../../../domain/entities/user_model.dart';
 import '../../providers/main/report/transaction_management/transaction_management_provider.dart';
 import '../../widgets/core/text/custom_text.dart';
 import '../../widgets/shared/header/report_header_tablet.dart';
@@ -68,6 +70,7 @@ class _TransactionManagementPageTabletState
   @override
   Widget build(BuildContext context) {
     final transactionState = ref.watch(transactionManagementProvider);
+    final user = Hive.box<UserModel>('userBox').get('userBox');
 
     final displayedStatus =
         ref.watch(transactionManagementProvider).value?.displayedStatus ?? [];
@@ -142,8 +145,9 @@ class _TransactionManagementPageTabletState
                                                 childAspectRatio: 3.1),
                                         itemBuilder: (context, index) =>
                                             TransactionManagementItem(
-                                          transaction: displayedStatus[index],
-                                        ),
+                                                transaction:
+                                                    displayedStatus[index],
+                                                user: user),
                                       ),
                               ),
                   ],

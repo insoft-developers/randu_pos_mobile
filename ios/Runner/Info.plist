@@ -27,28 +27,23 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>Aplikasi ini memerlukan akses Bluetooth untuk terhubung ke perangkat printer dan mencetak struk transaksi. Akses Bluetooth hanya akan digunakan untuk keperluan pencetakan dan tidak akan digunakan untuk tujuan lain tanpa izin.</string>
+	    <string>Aplikasi ini memerlukan akses Bluetooth untuk terhubung ke perangkat printer dan mencetak struk transaksi. Akses Bluetooth hanya akan digunakan untuk keperluan pencetakan dan tidak akan digunakan untuk tujuan lain tanpa izin.</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>Aplikasi ini memerlukan akses Bluetooth untuk terhubung ke perangkat printer dan mencetak struk transaksi. Akses Bluetooth hanya akan digunakan untuk keperluan pencetakan dan tidak akan digunakan untuk tujuan lain tanpa izin.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Aplikasi ini memerlukan akses ke kamera untuk scan barcode..</string>
+    <string>Aplikasi ini memerlukan akses Bluetooth untuk terhubung ke perangkat printer dan mencetak struk transaksi. Akses Bluetooth hanya akan digunakan untuk keperluan pencetakan dan tidak akan digunakan untuk tujuan lain tanpa izin.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Aplikasi ini memerlukan akses ke lokasi Anda saat digunakan untuk mencatat lokasi kehadiran secara akurat dalam proses absensi. Data lokasi hanya akan digunakan untuk tujuan ini dan tidak akan dibagikan tanpa izin.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Aplikasi ini memerlukan akses ke lokasi Anda saat digunakan untuk mencatat lokasi kehadiran secara akurat dalam proses absensi. Data lokasi hanya akan digunakan untuk tujuan ini dan tidak akan dibagikan tanpa izin..</string>
-	<key>NSLocationUsageDescription</key>
-	<string>Aplikasi ini memerlukan akses ke lokasi Anda saat digunakan untuk mencatat lokasi kehadiran secara akurat dalam proses absensi. Data lokasi hanya akan digunakan untuk tujuan ini dan tidak akan dibagikan tanpa izin..</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Aplikasi ini memerlukan akses ke lokasi Anda saat digunakan untuk mencatat lokasi kehadiran secara akurat dalam proses absensi. Data lokasi hanya akan digunakan untuk tujuan ini dan tidak akan dibagikan tanpa izin.</string>
+    <string>Aplikasi ini memerlukan akses ke lokasi Anda saat digunakan untuk mencatat lokasi kehadiran secara akurat dalam proses absensi. Data lokasi hanya akan digunakan untuk tujuan ini dan tidak akan dibagikan tanpa izin.</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Aplikasi ini memerlukan akses ke lokasi Anda saat digunakan untuk mencatat lokasi kehadiran secara akurat dalam proses absensi. Data lokasi hanya akan digunakan untuk tujuan ini dan tidak akan dibagikan tanpa izin..</string>
+    <key>NSLocationUsageDescription</key>
+    <string>Aplikasi ini memerlukan akses ke lokasi Anda saat digunakan untuk mencatat lokasi kehadiran secara akurat dalam proses absensi. Data lokasi hanya akan digunakan untuk tujuan ini dan tidak akan dibagikan tanpa izin..</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Aplikasi ini memerlukan akses ke galeri foto untuk mengunggah dan menyimpan foto sebagai bukti absensi. Foto yang diambil akan digunakan untuk mencatat kehadiran dan tidak akan dibagikan tanpa izin.</string>
+    <string>Aplikasi ini memerlukan akses ke galeri foto untuk mengunggah dan menyimpan foto sebagai bukti absensi. Foto yang diambil akan digunakan untuk mencatat kehadiran dan tidak akan dibagikan tanpa izin.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Aplikasi ini memerlukan akses ke kamera untuk scan barcode..</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>fetch</string>
-		<string>remote-notification</string>
-	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

@@ -370,6 +370,8 @@ extension PaymentReceiptModelExtensions on PaymentReceiptModel {
 
       if (receiptFrom == ReceiptFromEnum.report) {
         double pajak = tax / subTotal * 100;
+        pajak = (pajak).roundToDouble();
+
         bytes += ticket.row([
           PosColumn(text: '(+) $pajak%', width: 6),
           PosColumn(text: ':', width: 1),
@@ -408,7 +410,7 @@ extension PaymentReceiptModelExtensions on PaymentReceiptModel {
               styles: const PosStyles(align: PosAlign.right)),
         ]);
       } else {
-        if (receiptFrom == ReceiptFromEnum.report) {
+        if (receiptFrom == ReceiptFromEnum.report && (isRounded ?? false)) {
           double bulat = paid - tax - subTotal - shipping + discount;
           String bulatString = bulat.toString();
           String result = bulatString.split('.').first;
