@@ -21,6 +21,14 @@ class PaymentMethodController extends GetxController {
     print(selectedFlagName);
   }
 
+  void resetFlag() {
+    selectedFlagRow.value = <String, dynamic>{};
+    selectedFlagId.value = '';
+    selectedFlagName.value = 'No Flag';
+    flagData.value = List.empty();
+    print(selectedFlagName);
+  }
+
   void getFlagData(String? code) async {
     loading(true);
     final box = Hive.box<UserModel>('userBox');

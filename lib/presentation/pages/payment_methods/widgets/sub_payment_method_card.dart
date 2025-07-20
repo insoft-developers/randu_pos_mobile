@@ -42,7 +42,7 @@ class SubPaymentMethodCard extends ConsumerWidget {
           ref
               .read(paymentMethodSelectionProvider.notifier)
               .setSelectedSubPaymentMethod(subMethod);
-          print(subMethod);
+
           _paymentMethodController.getFlagData(subMethod.code);
 
           // _paymentMethodController.checkUser();

@@ -24,6 +24,8 @@ class DetailBankPaymentTablet extends ConsumerWidget {
     final selectedSubPaymentMethod =
         paymentMethodSelection.selectedSubPaymentMethod;
 
+    print("pm " + paymentMethodSelection.toString());
+
     double contentWidth =
         (MediaQuery.of(context).size.width - (16 * 3 + 24 * 2)) * 2 / 3;
     double itemWidth = contentWidth / 3 - (12 * (3 / 2));

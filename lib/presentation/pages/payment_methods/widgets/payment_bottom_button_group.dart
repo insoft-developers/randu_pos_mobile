@@ -121,7 +121,7 @@ class PaymentBottomButtonGroup extends ConsumerWidget {
                         Get.put(PaymentMethodController());
                     String flagId = pmc.selectedFlagId.value;
                     request = request.copyWith(flag: flagId);
-                    // debugPrint('request ${request.toJson()} ', wrapWidth: 1024);
+                    debugPrint('request ${request.toJson()} ', wrapWidth: 1024);
 
                     ref.read(sendPaymentProvider.notifier).sendPayment(request);
                   })),

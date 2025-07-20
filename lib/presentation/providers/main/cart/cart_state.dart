@@ -82,7 +82,18 @@ class CartState with _$CartState {
   }
 
   double get subTotalWithTax {
-    final total = subTotal * (tax ?? 0) / 100;
+    double dis = 0.0;
+    if (discount != null) {
+      if (discount?.type == 'nominal') {
+        dis = (discount?.value ?? 0).toDouble();
+      } else {
+        dis = ((discount!.value ?? 0) / 100) * subTotal;
+      }
+    } else {
+      dis = 0;
+    }
+
+    final total = (subTotal - dis + (orderFee ?? 0)) * (tax ?? 0) / 100;
     return total;
   }
 

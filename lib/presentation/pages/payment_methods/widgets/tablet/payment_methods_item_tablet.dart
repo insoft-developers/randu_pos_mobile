@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
 
 import '../../../../../domain/entities/transaction/cart/payment_method/payment_method_model.dart';
 import '../../../../../core/const/colors.dart';
+import '../../../../../insoft/controller/payment_method_controller.dart';
 import '../../../../providers/main/cart/payment_method_selection/payment_method_selection_provider.dart';
 
 import '../../../../widgets/core/container/custom_rounded_container.dart';
 import '../../../../widgets/core/text/custom_text.dart';
 
 class PaymentMethodsItemTablet extends ConsumerWidget {
-  const PaymentMethodsItemTablet({
+  PaymentMethodsItemTablet({
     super.key,
     required this.paymentMethod,
   });
 
   final PaymentMethodModel paymentMethod;
+  final PaymentMethodController _payment = Get.put(PaymentMethodController());
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -24,6 +27,7 @@ class PaymentMethodsItemTablet extends ConsumerWidget {
     return GestureDetector(
       onTap: () {
         print(paymentMethod.id);
+        _payment.resetFlag();
         ref
             .read(paymentMethodSelectionProvider.notifier)
             .setPaymentMethod(paymentMethod);
@@ -36,11 +40,13 @@ class PaymentMethodsItemTablet extends ConsumerWidget {
           return;
         }
 
-        if(paymentMethod.id == 5){
+        if (paymentMethod.id == 5) {
           ref
               .read(paymentMethodSelectionProvider.notifier)
-              .setSelectedSubPaymentMethod(
-              BankModel(method: 'Instant QRIS', code: 'randu-wallet', id: paymentMethod.id));
+              .setSelectedSubPaymentMethod(BankModel(
+                  method: 'Instant QRIS',
+                  code: 'randu-wallet',
+                  id: paymentMethod.id));
           return;
         }
 
@@ -49,6 +55,9 @@ class PaymentMethodsItemTablet extends ConsumerWidget {
           ref
               .read(paymentMethodSelectionProvider.notifier)
               .setSelectedSubPaymentMethod(paymentMethodItem);
+          if (paymentMethod.id == 3 || paymentMethod.id == 4) {
+            _payment.getFlagData(paymentMethodItem.code);
+          }
         }
       },
       child: CustomRoundedContainer(

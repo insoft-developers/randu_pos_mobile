@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
@@ -9,6 +10,7 @@ import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 import '../../../core/const/audio_const.dart';
 import '../../../core/utils/open_cashier_util.dart';
 import '../../../domain/entities/general_response.dart';
+import '../../../insoft/controller/premium_controller.dart';
 import '../../providers/cores/audio/just_audio_provider.dart';
 import '../../providers/main/cart/cart_provider.dart';
 import '../../providers/main/dialog_petty_cach_provider.dart';
@@ -24,10 +26,14 @@ class DashboardPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final PremiumController controller = Get.put(PremiumController());
+    final PremiumController controller = Get.put(PremiumController());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      // controller.cekPremium(context);
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      Future.microtask(() {
+        if (context.mounted) {
+          controller.cekPremium(context);
+        }
+      });
     });
     //DIALOG PETTY CASH
     pettyCashListener(ref, context);

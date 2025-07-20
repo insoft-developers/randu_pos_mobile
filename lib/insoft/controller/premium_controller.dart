@@ -9,7 +9,7 @@ import '../network.dart';
 
 import 'package:get/get.dart';
 
-class PremiunController extends GetxController {
+class PremiumController extends GetxController {
   Future cekPremium(BuildContext context) async {
     final box = Hive.box<UserModel>('userBox');
 
@@ -35,11 +35,13 @@ class PremiunController extends GetxController {
       return true;
     } else {
       print('update dolu dong');
-      return Navigator.push(
-        // ignore: use_build_context_synchronously
-        context,
-        MaterialPageRoute(builder: (context) => const Premium()),
-      );
+      if (context.mounted) {
+        return Navigator.push(
+          // ignore: use_build_context_synchronously
+          context,
+          MaterialPageRoute(builder: (context) => const Premium()),
+        );
+      }
     }
   }
 }

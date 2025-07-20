@@ -387,7 +387,8 @@ extension PaymentReceiptModelExtensions on PaymentReceiptModel {
           PosColumn(text: ':', width: 1),
           PosColumn(
               text: formatStringIDRToCurrency(
-                  text: (subTotal * tax / 100).toStringAsFixed(0),
+                  text: ((subTotal + shipping - discount) * tax / 100)
+                      .toStringAsFixed(0),
                   symbol: 'Rp '),
               width: 5,
               styles: const PosStyles(align: PosAlign.right)),
@@ -410,23 +411,24 @@ extension PaymentReceiptModelExtensions on PaymentReceiptModel {
               styles: const PosStyles(align: PosAlign.right)),
         ]);
       } else {
-        if (receiptFrom == ReceiptFromEnum.report && (isRounded ?? false)) {
+        if (receiptFrom == ReceiptFromEnum.report) {
           double bulat = paid - tax - subTotal - shipping + discount;
           String bulatString = bulat.toString();
           String result = bulatString.split('.').first;
 
-          if (bulat != '0') {
-            bytes += ticket.row([
-              PosColumn(text: 'PEMBULATAN', width: 6),
-              PosColumn(text: ':', width: 1),
-              PosColumn(
-                  text: result,
-                  width: 5,
-                  styles: const PosStyles(align: PosAlign.right)),
-            ]);
-          }
+          // if (bulat != '0') {
+          bytes += ticket.row([
+            PosColumn(text: 'PEMBULATAN', width: 6),
+            PosColumn(text: ':', width: 1),
+            PosColumn(
+                text: result,
+                width: 5,
+                styles: const PosStyles(align: PosAlign.right)),
+          ]);
+          // }
         }
       }
+
       bytes += ticket.hr();
 
       bytes += ticket.row([
