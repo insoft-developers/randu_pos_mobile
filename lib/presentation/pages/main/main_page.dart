@@ -115,7 +115,7 @@ class _MainPageState extends ConsumerState<MainPage> {
                   index: page,
                   children: [
                     const DashboardPage(),
-                    const TransactionManagementPage(),
+                    TransactionManagementPage(),
                     const DailyRecapPage(),
                     const ExpenditureDataPage(),
                     const QrTablePage(),

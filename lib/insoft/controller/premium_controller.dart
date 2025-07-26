@@ -9,8 +9,11 @@ import '../network.dart';
 
 import 'package:get/get.dart';
 
-class PremiunController extends GetxController {
-  Future cekPremium(BuildContext context) async {
+class PremiumController extends GetxController {
+  Future<void> cekPremium({
+    required Function onNotPremium,
+    required Function onPremium,
+  }) async {
     final box = Hive.box<UserModel>('userBox');
 
     if (box.isEmpty) {
@@ -19,27 +22,23 @@ class PremiunController extends GetxController {
     }
 
     UserModel? userdata = box.getAt(0);
-
     String userid = userdata!.id.toString();
     String username = userdata.username.toString();
 
-    print('userdata: $userdata');
     var data = {'userid': userid, 'username': username};
 
-    var res = await Network().auth(data, '/journal/check-omset');
+    try {
+      var res = await Network().auth(data, '/journal/check-omset');
+      var result = jsonDecode(res.body);
 
-    // Penanganan parsing response lebih aman
-    var result = jsonDecode(res.body);
-    if (result['success']) {
-      print('lanjut gunakan');
-      return true;
-    } else {
-      print('update dolu dong');
-      return Navigator.push(
-        // ignore: use_build_context_synchronously
-        context,
-        MaterialPageRoute(builder: (context) => const Premium()),
-      );
+      if (result['success']) {
+        onPremium(); // Premium valid
+      } else {
+        onNotPremium(); // Navigasi ke halaman premium
+      }
+    } catch (e, stack) {
+      debugPrint('Error cekPremium: $e');
+      debugPrint('$stack');
     }
   }
 }

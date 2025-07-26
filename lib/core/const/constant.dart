@@ -1,7 +1,7 @@
 import 'dart:io';
 
 const bool isDev = false;
-const String versionCode = '2.3.2';
+const String versionCode = '2.3.3';
 const endpointDev = 'https://dev.randu.co.id';
 // const endpointDev = 'http://192.168.100.3/randu-api/public';
 

@@ -166,7 +166,7 @@ class GoRouterService {
           GoRoute(
             path: '/transaction_management',
             name: 'transaction_management',
-            builder: (context, state) => const TransactionManagementPage(),
+            builder: (context, state) => TransactionManagementPage(),
           ),
           GoRoute(
             path: '/qr_meja',

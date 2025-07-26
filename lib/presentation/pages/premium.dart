@@ -78,7 +78,7 @@ class _PremiumState extends ConsumerState<Premium> {
                 Image.asset('assets/images/thank_you.png'),
                 Jarak(tinggi: 30),
                 const Text(
-                    'Jika bisnis Anda belum menghasilkan profit (keuntungan) atau hanya digunakan untuk mencatat keuangan sehari-hari, Anda dapat terus menggunakan aplikasi ini secara gratis tanpa biaya sepeser pun, tanpa ada batasan transaksi berapapun.',
+                    'Jika bisnis Anda belum menghasilkan profit (keuntungan) Anda dapat terus menggunakan aplikasi ini secara gratis tanpa biaya sepeser pun, tanpa ada batasan transaksi berapapun.',
                     textAlign: TextAlign.justify,
                     style: TextStyle(
                         fontFamily: FontSetting.reg,
@@ -87,7 +87,16 @@ class _PremiumState extends ConsumerState<Premium> {
                         fontWeight: FontWeight.normal)),
                 Jarak(tinggi: 20),
                 const Text(
-                    'Namun, apabila bisnis Anda sudah menghasilkan keuntungan lebih dari Rp10 juta per bulan, kami mengundang Anda untuk meng-upgrade ke versi premium dengan biaya hanya Rp819 per hari. Apa arti Rp819 dibandingkan dengan profit Rp10 juta per bulan, bukan? \nJika Anda menjalankan bisnis nirlaba (yayasan, panti asuhan, atau organisasi) atau menggunakan Randu untuk keperluan pendidikan baik sebagai pengajar maupun siswa, silakan hubungi kami melalui menu ticketing untuk mendapatkan akses premium secara gratis.',
+                    'Namun, apabila bisnis Anda sudah menghasilkan keuntungan kami mengundang Anda untuk meng-upgrade ke versi premium dengan biaya hanya Rp819 per hari.',
+                    textAlign: TextAlign.justify,
+                    style: TextStyle(
+                        fontFamily: FontSetting.reg,
+                        color: AppColor.mainColor,
+                        fontSize: 15,
+                        fontWeight: FontWeight.normal)),
+                Jarak(tinggi: 20),
+                const Text(
+                    'Jika Anda menjalankan bisnis nirlaba (yayasan, panti asuhan, atau organisasi) atau menggunakan Randu untuk keperluan pendidikan baik sebagai pengajar maupun siswa, silakan hubungi kami melalui menu ticketing untuk mendapatkan akses premium secara gratis.',
                     textAlign: TextAlign.justify,
                     style: TextStyle(
                         fontFamily: FontSetting.reg,
