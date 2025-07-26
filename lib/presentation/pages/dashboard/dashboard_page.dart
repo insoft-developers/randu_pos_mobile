@@ -26,15 +26,6 @@ class DashboardPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final PremiumController controller = Get.put(PremiumController());
-
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      Future.microtask(() {
-        if (context.mounted) {
-          controller.cekPremium(context);
-        }
-      });
-    });
     //DIALOG PETTY CASH
     pettyCashListener(ref, context);
     //OPEN / CLOSE CASHIER

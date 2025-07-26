@@ -158,7 +158,7 @@ extension PaymentReceiptModelExtensions on PaymentReceiptModel {
 
     // Business Information
     bytes += ticket.text(
-      formatPrinterText(businessName, paperSize == PaperSize.mm80 ? 40 : 32),
+      formatPrinterText(businessName, paperSize == PaperSize.mm80 ? 32 : 32),
       styles: const PosStyles(
         bold: true,
         align: PosAlign.center,
@@ -169,7 +169,7 @@ extension PaymentReceiptModelExtensions on PaymentReceiptModel {
     );
 
     bytes += ticket.text(
-      formatPrinterText(businessAddress, paperSize == PaperSize.mm80 ? 40 : 32),
+      formatPrinterText(businessAddress, paperSize == PaperSize.mm80 ? 32 : 32),
       styles: const PosStyles(align: PosAlign.center),
     );
     bytes += ticket.hr();
@@ -181,18 +181,18 @@ extension PaymentReceiptModelExtensions on PaymentReceiptModel {
     addRowToTicket(
         'CABANG',
         truncateWithEllipsis(
-            branchName ?? '', paperSize == PaperSize.mm80 ? 24 : 18));
+            branchName ?? '', paperSize == PaperSize.mm80 ? 18 : 18));
     addRowToTicket(
         'KASIR',
         truncateWithEllipsis(
-            staffName ?? '', paperSize == PaperSize.mm80 ? 24 : 18));
+            staffName ?? '', paperSize == PaperSize.mm80 ? 18 : 18));
     if (table != null && table != '-') {
       addRowToTicket('MEJA', table ?? '');
     }
     addRowToTicket(
         'NAMA',
         truncateWithEllipsis(
-            customer ?? '', paperSize == PaperSize.mm80 ? 24 : 18));
+            customer ?? '', paperSize == PaperSize.mm80 ? 18 : 18));
     if (paymentMethod == 'kas') {
       addRowToTicket('PEMBAYARAN', 'Tunai');
     } else if (paymentMethod == 'bank-bca') {
@@ -246,7 +246,7 @@ extension PaymentReceiptModelExtensions on PaymentReceiptModel {
             isCashier
                 ? '[ ]  ${quantityPrinted}x  ${product.name ?? ''}'
                 : product.name ?? '',
-            paperSize == PaperSize.mm80 ? 40 : 32),
+            paperSize == PaperSize.mm80 ? 32 : 32),
         styles: const PosStyles(align: PosAlign.left),
       );
 
@@ -572,7 +572,7 @@ Future<List<int>> generateQRCode({
   );
 
   bytes += ticket.text(
-    formatPrinterText(businessName, paperSize == PaperSize.mm80 ? 40 : 32),
+    formatPrinterText(businessName, paperSize == PaperSize.mm80 ? 32 : 32),
     styles: const PosStyles(align: PosAlign.center),
   );
   bytes += ticket.hr();
